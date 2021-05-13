@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: "urldelaapi/carpeta-server"
+  apiUrl: 'https://flights-info-api.herokuapp.com/',
+  socketUrl: 'https://flights-info-api.herokuapp.com/',
 };
