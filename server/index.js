@@ -43,7 +43,7 @@ app.use(express.urlencoded({
     extended: true
 }))
 
-
+app.use(express.static('dist'));
 /**
  * @swagger
  *
