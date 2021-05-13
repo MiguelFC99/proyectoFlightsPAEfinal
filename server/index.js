@@ -43,6 +43,8 @@ app.use(express.urlencoded({
     extended: true
 }))
 
+///para agregar el dist
+
 app.use(express.static('dist'));
 /**
  * @swagger
