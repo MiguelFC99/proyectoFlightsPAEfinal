@@ -98,6 +98,7 @@ export class FlightsListComponent implements OnInit {
     }
     this.userService.addItemFavoriteFlightsListUser(newItem).then(result=>{
       console.log("respuesta al guardar vuelo: ",result);
+      alert("se agregó a tu lista de vuelos");
     }).catch(err=>{
       console.log("ocurrio un error al guardar", err);
     })

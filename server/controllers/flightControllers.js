@@ -1,13 +1,13 @@
 const fetch = require('node-fetch');
-//const dotenv = require('dotenv');
-//dotenv.config();
+const dotenv = require('dotenv');
+dotenv.config();
 
 //prueba
 const dataFile = require('./dataTest.json');
 
-if (process.env.NODE_ENV == 'dev') {
+/*if (process.env.NODE_ENV == 'dev') {
     require('dotenv').config();
-  }
+  }*/
   
 
 const urlAPI = `http://api.aviationstack.com/v1/flights?access_key=${process.env.KEY_API}&dep_iata=`;
@@ -72,32 +72,15 @@ console.log(statusF("diverted"));
 class FlightControllers {
 
     getFlightsByArr(req, res) {
+        console.log("busca por ARR")
         let url = urlAPIArr + req.query.arr_iata;
         console.log(url);
-
-        /*let dataList = dataFile.data.map(e => {
-            return {
-                vueloNum: e.flight.iata,
-                airLine: e.airline.name,
-                salidaTime: e.departure.actual == null ? "---" : dateFormat(e.departure.actual),
-                llegadaTime: e.arrival.estimated == null ? "---" : dateFormat(e.arrival.estimated),
-                destinoName: e.arrival.airport,
-                status: statusF(e.flight_status).stats,
-                icon: statusF(e.flight_status).icon
-            }
-        })
-
-
-        res.status(230).send(dataList);*/
-
-
-
         fetch(url).then(response =>{
             return response.json();
         }).then(data => {
             let dataList = data.data.map(e =>{
             return {
-                vueloNum: e.flight.iata,
+                vueloNum: e.flight.iata==null?"XXXXXX":e.flight.iata,
                 airLine: e.airline.name,
                 salidaTime: e.departure.actual==null?"---":dateFormat(e.departure.actual),
                 llegadaTime: e.arrival.estimated==null?"---":dateFormat(e.arrival.estimated),
@@ -113,30 +96,17 @@ class FlightControllers {
         });
     }
     getFlightsByDep(req, res) {
+        console.log("entra a aqui para buscar por DEP")
         let url = urlAPI + req.query.dep_iata;
 
-       /* let dataList = dataFile.data.map(e => {
-            return {
-                vueloNum: e.flight.iata,
-                airLine: e.airline.name,
-                salidaTime: e.departure.actual == null ? "---" : dateFormat(e.departure.actual),
-                llegadaTime: e.arrival.estimated == null ? "---" : dateFormat(e.arrival.estimated),
-                destinoName: e.arrival.airport,
-                status: statusF(e.flight_status).stats,
-                icon: statusF(e.flight_status).icon
-            }
-        })
-
-
-        res.status(230).send(dataList);*/
-
+        console.log(url);
         
         fetch(url).then(response => {
                 return response.json();
             }).then(data => {
                 let dataList = data.data.map(e => {
                     return {
-                        vueloNum: e.flight.iata,
+                        vueloNum: e.flight.iata==null?"XXXXXX":e.flight.iata,
                         airLine: e.airline.name,
                         salidaTime: e.departure.actual == null ? "---" : dateFormat(e.departure.actual),
                         llegadaTime: e.arrival.estimated == null ? "---" : dateFormat(e.arrival.estimated),
@@ -161,7 +131,7 @@ class FlightControllers {
         }).then(data => {
             let dataList = data.data.map(e =>{
             return {
-                vueloNum: e.flight.iata,
+                vueloNum: e.flight.iata==null?"XXXXXX":e.flight.iata,
                 airLine: e.airline.name,
                 salidaTime: e.departure.actual==null?"---":dateFormat(e.departure.actual),
                 llegadaTime: e.arrival.estimated==null?"---":dateFormat(e.arrival.estimated),

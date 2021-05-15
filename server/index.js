@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-//const dotenv = require('dotenv');
-//dotenv.config();
+const dotenv = require('dotenv');
+dotenv.config();
 const socketIo = require('socket.io');
 const swaggerJsDoc = require('swagger-jsdoc');
 
@@ -15,9 +15,9 @@ const {
     usersRoutes
 } = require('./routes/indexRoutes');
 
-if (process.env.NODE_ENV == 'dev') {
+/*if (process.env.NODE_ENV == 'dev') {
     require('dotenv').config();
-  }
+  }*/
 
 const PORT = process.env.PORT || 3000;
 const path = require('path');
@@ -45,7 +45,7 @@ app.use(express.urlencoded({
 
 ///para agregar el dist
 
-app.use(express.static('dist'));
+//app.use(express.static('dist'));
 /**
  * @swagger
  *

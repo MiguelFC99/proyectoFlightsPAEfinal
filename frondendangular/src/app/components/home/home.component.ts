@@ -99,14 +99,22 @@ export class HomeComponent implements OnInit {
 
   buscarAero(){
     console.log(this.iataAir);
-    this.flightService.getOneAirports("?iata_one_airp=" + this.iataAir.toUpperCase()).then(result=>{
-      console.log("Ok lista de aeropuertos: ");
-      this.airports = result;
-      this.iataAir = '';
-      console.log(this.airports);
-    }).catch(err=>{
-      console.log("error en lista de Aeropuertos: ",err);
-      this.iataAir = '';
-    })
+    if(this.iataAir!=" "){
+      this.flightService.getOneAirports("?iata_one_airp=" + this.iataAir.toUpperCase()).then(result=>{
+        console.log("Ok lista de aeropuertos: ");
+        this.airports = result;
+        this.iataAir = '';
+        console.log(this.airports);
+      }).catch(err=>{
+        console.log("error en lista de Aeropuertos: ",err);
+        this.iataAir = '';
+        this.flightService.getAirports().then(result=>{
+          console.log("Ok lista de aeropuertos: ");
+          this.airports = result;
+        }).catch(err=>{
+          console.log("error en lista de Aeropuertos: ",err);
+        })
+      })
+    }
   }
 }
